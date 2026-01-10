@@ -1,0 +1,12 @@
+{
+  "Thresholds": {
+      "PoolingIntervalSeconds": 5,
+      "CPUThresholdPercent": 80,
+      "MemoryThresholdPercent": 70,
+      "FreeDiskSpaceThresholdPercent": 20,
+      "DiskIOThresholdPercent": 60,
+      "NetworkIOThresholdPercent": 50,
+      "IncomingPacketsLossThreshold": 0.1,
+      "OutgoingPacketsLossThreshold": 0.05
+  }
+}

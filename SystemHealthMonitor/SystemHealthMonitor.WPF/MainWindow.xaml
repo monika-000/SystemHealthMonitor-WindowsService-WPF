@@ -1,0 +1,30 @@
+﻿<Window x:Class="SystemHealthMonitor.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemHealthMonitor.WPF.View"
+        mc:Ignorable="d"
+        Title="System Health Monitor" Height="450" Width="800" Icon="/SystemHealthMonitor.ico" FontSize="14" FontFamily="Segoe UI">
+   
+   <!--<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+
+    </Grid>-->
+    <TabControl FontFamily="Lucida Sans Unicode">
+        <TabItem Header="Dashboard">
+            <local:DashboardView />
+        </TabItem>
+        <TabItem Header="Results">
+            <local:ResultsView />
+        </TabItem>
+         <TabItem Header="Settings">
+            <local:SettingsView />
+         </TabItem>
+    </TabControl>
+</Window>
