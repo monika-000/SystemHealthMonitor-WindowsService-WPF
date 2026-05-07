@@ -1,0 +1,30 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" 
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" 
+	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
+	<Bundle Id="MPCorp.SystemHealthMonitor.BundleInstaller" Name="SystemHealthMonitor" Manufacturer="MPCorp" Version="1.0.0.0" IconSourceFile="..\out\Icons\SystemHealthMonitor.ico">
+		<Variable Name="DOTNET_DESKTOP_RUNTIME_INSTALLED" Type="version" Value=""/>
+		<BootstrapperApplication>
+			<bal:WixStandardBootstrapperApplication LicenseUrl="https://github.com/monika-000/SystemHealthMonitor-WindowsService/blob/master/LICENSE" Theme="hyperlinkLicense" LogoFile="..\out\Icons\SystemHealthMonitor.png" />	
+		</BootstrapperApplication>
+		<netfx:DotNetCoreSearch
+			RuntimeType="desktop"
+			Platform="x64"
+			MajorVersion="10"
+			Variable="DOTNET_DESKTOP_RUNTIME_INSTALLED" />
+		<Chain>
+			<ExePackage
+				Id="DotnetRuntime"
+				SourceFile="dotnet-runtime-10.0.7-win-x64.exe"
+				InstallArguments="/install /quiet /norestart"
+				UninstallArguments="/uninstall /quiet /norestart"
+				DetectCondition="DOTNET_DESKTOP_RUNTIME_INSTALLED"
+				Compressed="yes"
+				Vital="yes"/>
+
+			<MsiPackage
+				SourceFile="..\installer\en-US\SystemHealthMonitor.MSI.msi"
+				Vital="yes" />
+		</Chain>
+
+	</Bundle>
+</Wix>

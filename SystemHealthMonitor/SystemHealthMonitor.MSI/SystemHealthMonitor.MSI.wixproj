@@ -1,0 +1,11 @@
+﻿<Project Sdk="WixToolset.Sdk/7.0.0">
+  <ItemGroup>
+    <ProjectReference Include="..\SystemHealthMonitor.Shared\SystemHealthMonitor.Shared.csproj" />
+    <ProjectReference Include="..\SystemHealthMonitor.WindowsService\SystemHealthMonitor.WindowsService.csproj" />
+    <ProjectReference Include="..\SystemHealthMonitor.WPF\SystemHealthMonitor.WPF.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <AcceptEula>wix7</AcceptEula>
+	<DefineConstants>SolutionDirectory=$(MSBuildProjectDirectory)</DefineConstants>
+  </PropertyGroup>
+</Project>

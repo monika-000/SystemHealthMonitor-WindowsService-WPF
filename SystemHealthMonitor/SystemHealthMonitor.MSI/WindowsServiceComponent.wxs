@@ -1,0 +1,28 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="WindowsServiceComponent" Directory="INSTALLFOLDER">
+      <Component Guid="E972B1C5-D81A-458B-BE0E-B960CAA90D6A">
+		<File Source="$(var.SolutionDirectory)\..\out\SystemHealthMonitor.WindowsService.exe" KeyPath="yes" />
+        
+		  <!-- Install service -->
+		  <ServiceInstall
+			Id="WindowsServiceInstall"
+			Account="NT AUTHORITY\NetworkService"
+			Name="SystemHealthMonitorService"
+			DisplayName="System Health Monitor Service"
+			Description="Monitors system health metrics and triggers alerts when defined thresholds are exceeded."
+			Start="auto"
+			Type="ownProcess"
+			ErrorControl="normal" />
+
+		  <!-- Add service control -->
+		  <ServiceControl
+			 Id="WindowsServiceControl"
+			 Name="SystemHealthMonitorService"
+			 Start="install"
+			 Stop="both" 
+			 Remove="uninstall" />
+      </Component>	 
+  </ComponentGroup> 
+ </Fragment>
+</Wix>

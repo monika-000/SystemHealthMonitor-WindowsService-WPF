@@ -1,0 +1,11 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+	<Component Id="SettingsConfigComponent" Directory="SystemHealthMonitorApp" Guid="159E852E-46C4-4462-B8E6-D40953DF1DC5">
+		<File
+			Id="ConfigJson"
+			Source="$(var.SolutionDirectory)\..\out\settings.json"
+			Name="settings.json"
+			KeyPath="yes" /> 
+	</Component>
+  </Fragment>
+</Wix>

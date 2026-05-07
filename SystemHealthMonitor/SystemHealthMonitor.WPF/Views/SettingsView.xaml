@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="SystemHealthMonitor.WPF.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SystemHealthMonitor.WPF.Views"
+             xmlns:controls="clr-namespace:SystemHealthMonitor.WPF.Views.CustomControls"
+             xmlns:extensions="clr-namespace:SystemHealthMonitor.WPF.MarkupExtensions"
+             xmlns:models="clr-namespace:SystemHealthMonitor.Shared.Models;assembly=SystemHealthMonitor.Shared"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Save Button -->
+        <Style x:Key="SaveButton" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="#008190"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="Margin" Value="0, 10, 18, 20" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Width" Value="90" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" TextBlock.Foreground="{TemplateBinding Foreground}" TextBlock.FontSize="{TemplateBinding FontSize}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2E8FA3" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- TextBox style -->
+        <Style x:Key="SettingsTextBox" TargetType="{x:Type TextBox}" >
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="BorderBrush" Value="#A5D4DD" />
+            <Setter Property="Background" Value="#F5F5F5" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Margin" Value="5, 10, 5, 10" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <!-- Label style-->
+        <Style x:Key="SettingsLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Margin" Value="5, 10, 5, 10" />
+        </Style>
+        <Style x:Key="TresholdsBorder" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Margin" Value="20, 0, 20, 0" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+        <Style x:Key="ThresholdsBackground" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <controls:ViewHeader  Grid.Row="0"/>
+        <Border Grid.Row="1" Style="{DynamicResource TresholdsBorder}">
+            <Grid Grid.Row="1" Style="{DynamicResource ThresholdsBackground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*" />
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition Width="35*" />
+                    <ColumnDefinition Width="15*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5">
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=PoolingIntervalSeconds}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=PoolingIntervalSeconds, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=PoolingIntervalSeconds, Mode=Description}" />
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=CPUTreshold}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=CPUThresholdPercent, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=CPUThresholdPercent, Mode=Description}" />
+                    <Label Style="{DynamicResource SettingsLabel}" Target= "{Binding ElementName=MemoryThreshold}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=MemoryThresholdPercent, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=MemoryThresholdPercent, Mode=Description}"/>
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=UsedDiskSpaceThreshold}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=UsedDiskSpaceThresholdPercent, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=UsedDiskSpaceThresholdPercent, Mode=Description}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBox Name="PoolingIntervalSeconds" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.PoolingIntervalSeconds}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="CPUTreshold" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.CPUThresholdPercent}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="MemoryThreshold" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.MemoryThresholdPercent}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="UsedDiskSpaceThreshold" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.UsedDiskSpaceThresholdPercent}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5">
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=DiskIOThreshold}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=DiskIOThresholdPercent, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=DiskIOThresholdPercent, Mode=Description}"/>
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=NetworkIOThreshold}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=NetworkIOThresholdPercent, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=NetworkIOThresholdPercent, Mode=Description}" />
+                    <Label Style="{DynamicResource SettingsLabel}" Target="{Binding ElementName=IncomingPacketsLoss}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=IncomingPacketsLossThreshold, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=IncomingPacketsLossThreshold, Mode=Description}" />
+                    <Label Style="{DynamicResource SettingsLabel}" Target= "{Binding ElementName=OutgoingPacketsLoss}" Content="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=OutgoingPacketsLossThreshold, Mode=DisplayName}" ToolTip="{extensions:CustomAttributes Type={x:Type models:MetricsThresholds}, Property=OutgoingPacketsLossThreshold, Mode=Description}" />
+                </StackPanel>
+                <StackPanel Grid.Column="3">
+                    <TextBox Name="DiskIOThreshold" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.DiskIOThresholdPercent}"  PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="NetworkIOThreshold" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.NetworkIOThresholdPercent}"  PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="IncomingPacketsLoss" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.IncomingPacketsLossThreshold}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                    <TextBox Name="OutgoingPacketsLoss" Style="{DynamicResource SettingsTextBox}" Text="{Binding Settings.Thresholds.OutgoingPacketsLossThreshold}" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Button Grid.Row="2" Content="Save" Command="{Binding SaveSettingsCommand}" Style="{DynamicResource SaveButton}" />
+    </Grid>
+</UserControl>

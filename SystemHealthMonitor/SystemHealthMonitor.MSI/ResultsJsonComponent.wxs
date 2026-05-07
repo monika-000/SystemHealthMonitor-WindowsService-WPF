@@ -1,0 +1,11 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+	<Component Id="ResultsJsonComponent" Directory="SystemHealthMonitorApp" Guid="FB292108-28D9-458B-AE85-BD3CB8175A18">
+		<File
+			Id="ResultsJson"
+			Source="$(var.SolutionDirectory)\..\out\results.json"
+			Name="results.json"
+			KeyPath="yes" /> 
+	</Component>
+  </Fragment>
+</Wix>

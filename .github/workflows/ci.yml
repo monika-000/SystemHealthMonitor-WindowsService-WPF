@@ -1,0 +1,40 @@
+name: Continuous Integration
+
+# Trigger the CI pipeline on push or pull request (master branch)
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      # Step 2: Install .Net Desktop runtime
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Step 3: Restore nuget packages
+      - name: Restore
+        run: dotnet restore SystemHealthMonitor/SystemHealthMonitor.sln
+      
+      # Step 4: Build windows service to out folder
+      - name: Build Windows Service
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.WindowsService/SystemHealthMonitor.WindowsService.csproj -c Release -o out
+
+      # Step 5: Build WPF to out folder
+      - name: Build WPF
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.WPF/SystemHealthMonitor.WPF.csproj -c Release -o out
+
+    
