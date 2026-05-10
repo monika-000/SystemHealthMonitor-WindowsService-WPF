@@ -10,7 +10,7 @@ namespace SystemHealthMonitor.WPF.Interfaces
     public interface IHealthMonitorNavigationService
     {
         BaseViewModel NavigateTo<TView, TViewModel>() 
-            where TView : UserControl
+            where TView : System.Windows.Controls.UserControl
             where TViewModel: BaseViewModel;
         void BringWindowToFront();
 

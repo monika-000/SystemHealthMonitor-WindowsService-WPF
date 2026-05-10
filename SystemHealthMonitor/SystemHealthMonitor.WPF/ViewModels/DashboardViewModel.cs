@@ -87,7 +87,7 @@ namespace SystemHealthMonitor.WPF.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError("Failed to load results. Exception: {0}", ex);
-                MessageBox.Show("Couldn't load dashboard results. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Couldn't load dashboard results. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

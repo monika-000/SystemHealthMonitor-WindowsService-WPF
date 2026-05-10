@@ -10,7 +10,7 @@ namespace SystemHealthMonitor.WPF.Views.CustomControls
     /// <summary>
     /// Interaction logic for LatestResults.xaml
     /// </summary>
-    public partial class ResultsCard : UserControl
+    public partial class ResultsCard : System.Windows.Controls.UserControl
     {
         public string CardTitle
         {

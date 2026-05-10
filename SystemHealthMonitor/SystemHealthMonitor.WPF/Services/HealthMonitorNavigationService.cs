@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using SystemHealthMonitor.WPF.Interfaces;
 using SystemHealthMonitor.WPF.ViewModels;
-using SystemHealthMonitor.WPF.Views;
 
 
 namespace SystemHealthMonitor.WPF.Services
@@ -21,13 +20,13 @@ namespace SystemHealthMonitor.WPF.Services
         }
 
         public BaseViewModel NavigateTo<TView, TViewModel>()
-            where TView : UserControl
+            where TView : System.Windows.Controls.UserControl
             where TViewModel : BaseViewModel
         {
             var vm = _serviceProvider.GetRequiredService<TViewModel>();
-            
+
             //Run on main STA thread
-            Application.Current.Dispatcher.Invoke(() =>
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
                 var view = _serviceProvider.GetRequiredService<TView>();
               
@@ -39,12 +38,12 @@ namespace SystemHealthMonitor.WPF.Services
         }
         public void NavigateTo(Type viewType)
         {
-            var view = (UserControl)_serviceProvider.GetRequiredService(viewType);
+            var view = (System.Windows.Controls.UserControl)_serviceProvider.GetRequiredService(viewType);
             _contentHost.Content = view;
         }
         public void BringWindowToFront()
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
                 if (_mainWindow.WindowState == System.Windows.WindowState.Minimized)
                 {

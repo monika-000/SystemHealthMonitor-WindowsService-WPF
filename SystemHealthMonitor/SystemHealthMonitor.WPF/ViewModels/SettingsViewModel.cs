@@ -54,13 +54,13 @@ namespace SystemHealthMonitor.WPF.ViewModels
                 };
 
                 _settingsService.SaveSettigns(newSettings);
-                MessageBox.Show("Settings saved successfully.", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("Settings saved successfully.", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
                 LoadSettings();
             }
             catch (Exception ex)
             {
                 _logger.LogError("Failed to save settings. Exception: {0}", ex);
-                MessageBox.Show("Couldn't save settings. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Couldn't save settings. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -82,7 +82,7 @@ namespace SystemHealthMonitor.WPF.ViewModels
         {
             if(!_settingsLoadedSuccessfully)
             {
-                MessageBox.Show("Couldn't load settings. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Couldn't load settings. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
