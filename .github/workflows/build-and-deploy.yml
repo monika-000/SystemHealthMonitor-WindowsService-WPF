@@ -1,0 +1,78 @@
+name: Build and Deploy
+
+permissions:
+  actions: write
+  contents: write
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    runs-on: windows-latest
+
+    steps:
+
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install .Net Desktop runtime
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Step 3: Restore nuget packages
+      - name: Restore
+        run: dotnet restore SystemHealthMonitor/SystemHealthMonitor.sln
+
+      # Step 4: Build windows service to out folder
+      - name: Build Windows Service
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.WindowsService/SystemHealthMonitor.WindowsService.csproj -c Release -o out
+
+      # Step 5: Build WPF to out folder
+      - name: Build WPF
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.WPF/SystemHealthMonitor.WPF.csproj -c Release -o out
+
+      # Step 6: Upload build output as artifact
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+      
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Download build output from CI
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: out
+
+      # Step 3: Build msi package
+      - name: Build MSI Package
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.MSI/SystemHealthMonitor.MSI.wixproj -c Release -o installer
+
+      # Step 4: Build burn installer
+      - name: Build Burn Installer
+        run: dotnet build SystemHealthMonitor/SystemHealthMonitor.BundleInstaller/SystemHealthMonitor.BundleInstaller.wixproj -c Release -o installer
+
+      # Step 5 : Upload Burn installer to release assets
+      - name: Upload Burn Installer to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            SystemHealthMonitor/installer/SystemHealthMonitor.BundleInstaller.exe
