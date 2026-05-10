@@ -10,7 +10,7 @@ namespace SystemHealthMonitor.WPF.Views
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class SettingsView : UserControl
+    public partial class SettingsView : System.Windows.Controls.UserControl
     {
         public SettingsView()
         {

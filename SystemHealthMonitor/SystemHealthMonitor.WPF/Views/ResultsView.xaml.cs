@@ -8,12 +8,12 @@ namespace SystemHealthMonitor.WPF.Views
     /// <summary>
     /// Interaction logic for ResultsView.xaml
     /// </summary>
-    public partial class ResultsView : UserControl
+    public partial class ResultsView : System.Windows.Controls.UserControl
     {
         public ResultsView()
         {
             InitializeComponent();
-            var main = Application.Current.MainWindow as MainWindow;
+            var main = System.Windows.Application.Current.MainWindow as MainWindow;
             main?.CleanupMemoryRequest += OnCleanupMemoryRequest;
             main?.LoadCollectionsToMemoryRequest += OnLoadCollectionsRequest;
         } 

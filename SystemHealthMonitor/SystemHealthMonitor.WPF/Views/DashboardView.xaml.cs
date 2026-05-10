@@ -9,12 +9,12 @@ using SystemHealthMonitor.WPF.ViewModels;
 
 namespace SystemHealthMonitor.WPF.Views
 {
-    public partial class DashboardView : UserControl
+    public partial class DashboardView : System.Windows.Controls.UserControl
     {
         public DashboardView()
         {
             InitializeComponent();
-            var main = Application.Current.MainWindow as MainWindow;
+            var main = System.Windows.Application.Current.MainWindow as MainWindow;
             main?.CleanupMemoryRequest += OnCleanupMemoryRequest;
             main?.LoadCollectionsToMemoryRequest += OnLoadCollectionsRequest;
         }

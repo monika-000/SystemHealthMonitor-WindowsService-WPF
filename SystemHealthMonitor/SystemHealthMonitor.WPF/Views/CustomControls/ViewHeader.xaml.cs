@@ -16,7 +16,7 @@ namespace SystemHealthMonitor.WPF.Views.CustomControls
     /// <summary>
     /// Interaction logic for DashboardHeader.xaml
     /// </summary>
-    public partial class ViewHeader : UserControl
+    public partial class ViewHeader : System.Windows.Controls.UserControl
     {
         public ViewHeader()
         {

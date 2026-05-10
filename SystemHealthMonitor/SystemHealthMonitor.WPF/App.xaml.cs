@@ -17,7 +17,7 @@ using Forms = System.Windows.Forms;
 
 namespace SystemHealthMonitor.WPF
 {
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         private Forms.NotifyIcon _notifyIcon;
         private MainWindow _mainWindow;
@@ -134,7 +134,7 @@ namespace SystemHealthMonitor.WPF
 
         private void OnQuitClicked(object sender, EventArgs e)
         {
-            Application.Current.Shutdown();
+            Current.Shutdown();
         }
         protected override void OnExit(ExitEventArgs e)
         {
