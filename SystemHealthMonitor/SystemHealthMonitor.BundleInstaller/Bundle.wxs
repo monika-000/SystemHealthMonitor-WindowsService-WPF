@@ -4,7 +4,7 @@
 	<Bundle Id="MPCorp.SystemHealthMonitor.BundleInstaller" Name="SystemHealthMonitor" Manufacturer="MPCorp" Version="1.0.0.0" IconSourceFile="..\out\Icons\SystemHealthMonitor.ico">
 		<Variable Name="DOTNET_DESKTOP_RUNTIME_INSTALLED" Type="version" Value=""/>
 		<BootstrapperApplication>
-			<bal:WixStandardBootstrapperApplication LicenseUrl="https://github.com/monika-000/SystemHealthMonitor-WindowsService/blob/master/LICENSE" Theme="hyperlinkLicense" LogoFile="..\out\Icons\SystemHealthMonitor.png" />	
+			<bal:WixStandardBootstrapperApplication LicenseUrl="https://github.com/monika-000/SystemHealthMonitor-WindowsService-WPF/blob/master/LICENSE" Theme="hyperlinkLicense" LogoFile="..\out\Icons\SystemHealthMonitor.png" />	
 		</BootstrapperApplication>
 		<netfx:DotNetCoreSearch
 			RuntimeType="desktop"
