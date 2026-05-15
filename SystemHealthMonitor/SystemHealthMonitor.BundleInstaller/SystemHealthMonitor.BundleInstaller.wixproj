@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Bundle</OutputType>
 	  <AcceptEula>wix7</AcceptEula>
+	  <DefineConstants>SolutionDirectory=$(MSBuildProjectDirectory)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

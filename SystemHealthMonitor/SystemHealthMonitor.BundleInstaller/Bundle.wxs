@@ -1,10 +1,10 @@
-﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" 
-	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" 
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
 	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
-	<Bundle Id="MPCorp.SystemHealthMonitor.BundleInstaller" Name="SystemHealthMonitor" Manufacturer="MPCorp" Version="1.0.0.0" IconSourceFile="..\out\Icons\SystemHealthMonitor.ico">
+	<Bundle Id="MPCorp.SystemHealthMonitor.BundleInstaller" Name="SystemHealthMonitor" Manufacturer="MPCorp" Version="1.0.0.0" IconSourceFile="(var.SolutionDirectory)\..\..\out\Icons\SystemHealthMonitor.ico">
 		<Variable Name="DOTNET_DESKTOP_RUNTIME_INSTALLED" Type="version" Value=""/>
 		<BootstrapperApplication>
-			<bal:WixStandardBootstrapperApplication LicenseUrl="https://github.com/monika-000/SystemHealthMonitor-WindowsService-WPF/blob/master/LICENSE" Theme="hyperlinkLicense" LogoFile="..\out\Icons\SystemHealthMonitor.png" />	
+			<bal:WixStandardBootstrapperApplication LicenseUrl="https://github.com/monika-000/SystemHealthMonitor-WindowsService/blob/master/LICENSE" Theme="hyperlinkLicense" LogoFile="(var.SolutionDirectory)\..\..\out\Icons\SystemHealthMonitor.png" />
 		</BootstrapperApplication>
 		<netfx:DotNetCoreSearch
 			RuntimeType="desktop"
@@ -22,7 +22,7 @@
 				Vital="yes"/>
 
 			<MsiPackage
-				SourceFile="..\installer\en-US\SystemHealthMonitor.MSI.msi"
+				SourceFile="$(var.SolutionDirectory)\..\..\installer\en-US\SystemHealthMonitor.MSI.msi"
 				Vital="yes" />
 		</Chain>
 
