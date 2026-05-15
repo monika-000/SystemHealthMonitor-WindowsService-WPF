@@ -1,7 +1,7 @@
 # System Health Monitor
 
 A comprehensive Windows Service & WPF application designed for continuous system‑health monitoring, real‑time alerting, and extensible metric analysis. The platform combines a multi‑component architecture, robust communication patterns, and automated deployment pipelines to deliver a reliable and maintainable monitoring solution.
-## 🚀 Features
+## ✨ Features
 ### Core Architecture
 * Windows Service for background metric collection at configurable intervals
 * WPF desktop application for interactive monitoring, configuration, and visualisation
@@ -29,14 +29,16 @@ Additional metrics can be added through a modular extension pattern
 * Comprehensive logging system capturing service activity, metric results, and application events
 * Automated cleanup logic for removing old logs and purging outdated metric results to maintain performance and storage efficiency
 
-## 🛠️ Installation & Deployment
+## 🚀 Installation
 
-* GitHub pipeline packaging to build, package, and publish the entire solution
-* Produces a single EXE installer bundling:
-  *  .NET runtime
-  *  Windows Service
-  *  WPF application
-* Burn installer integration using WiX Burn to install prerequisites and generate an MSI installer for seamless deployment
+Download the latest installer from the **Releases** page:
+
+👉 [https://github.com/<your-repo>/releases/latest](https://github.com/monika-000/SystemHealthMonitor-WindowsService-WPF/releases)
+
+Run the `SystemHealthMonitor.BundleInstaller.exe` to install:
+- .NET runtime
+- Windows Service
+- WPF desktop
 
 ## 🧱 Technology Stack
 * .NET 10+
