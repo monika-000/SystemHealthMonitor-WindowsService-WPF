@@ -60,19 +60,49 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: out
+          path: SystemHealthMonitor/out  
 
       # Step 3: Build msi package
       - name: Build MSI Package
         run: dotnet build SystemHealthMonitor/SystemHealthMonitor.MSI/SystemHealthMonitor.MSI.wixproj -c Release -o installer
-
+   
       # Step 4: Build burn installer
       - name: Build Burn Installer
         run: dotnet build SystemHealthMonitor/SystemHealthMonitor.BundleInstaller/SystemHealthMonitor.BundleInstaller.wixproj -c Release -o installer
+     
+      # Step 5: Get latest tag
+      - name: Get latest tag
+        id: get_tag
+        shell: pwsh
+        run: |
+          $tag = git tag --sort=-v:refname | Select-Object -First 1
+          "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-      # Step 5 : Upload Burn installer to release assets
+      # Step 6: Compute nhext tag version
+      - name: Compute next version
+        id: version
+        shell: pwsh
+        run: |
+          $BASE = "1.0"
+          $LAST = "${{ steps.get_tag.outputs.tag }}"
+
+          if ([string]::IsNullOrWhiteSpace($LAST)) {
+              # No previous tag → start at 1.0.1
+              $NEXT = "$BASE.1"
+          }
+          else {
+              # Extract the last number after the final dot
+              $NUM = [int]($LAST.Split('.')[-1])
+              $NEXT = "$BASE." + ($NUM + 1)
+          }
+
+          "next=$NEXT" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+ 
+      # Step 7 : Upload Burn installer to release assets and create version tag
       - name: Upload Burn Installer to Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: v${{ steps.version.outputs.next }}
+          name: Release v${{ steps.version.outputs.next }}
           files: |
-            SystemHealthMonitor/installer/SystemHealthMonitor.BundleInstaller.exe
+            installer/SystemHealthMonitor.BundleInstaller.exe

@@ -1,28 +1,23 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Fragment>
-    <ComponentGroup Id="WPFAppComponent" Directory="INSTALLFOLDER">
-      <Component Guid="F239C8BF-3FE1-4069-9180-A03CD34216F9">
-        <File Source="$(var.SolutionDirectory)\..\out\SystemHealthMonitor.WPF.exe" KeyPath="yes" />
-		  
-		  <!-- Start Menu Shortcut -->
-		  <Shortcut
-			  Id="WpfShortcut"
-			  Name="YourProduct"
-			  WorkingDirectory="INSTALLFOLDER"
-			  Icon="WpfIcon"
-			  Target="[INSTALLFOLDER]\SystemHealthMonitor.WPF.exe" />
-		
-		  <!-- Registry Value -->
-		  <RegistryValue
-			  Root="HKCU"
-			  Key="Software\MPCorp\SystemHealthMonitorApp"
-			  Name="Installed"
-			  Type="integer"
-			  Value="1" />
-      </Component>
+	<Fragment>
+		<ComponentGroup Id="WPFAppComponent" Directory="INSTALLFOLDER">
+			<Component Guid="F239C8BF-3FE1-4069-9180-A03CD34216F9">
+				<!-- Start Menu Shortcut -->
+				<Shortcut
+					Id="WpfShortcut"
+					Name="YourProduct"
+					WorkingDirectory="INSTALLFOLDER"
+					Icon="WpfIcon"
+					Target="[INSTALLFOLDER]\SystemHealthMonitor.WPF.exe" />
 
-	  <!-- Include all other WPF and service files -->
-	  <Files Include="$(var.SolutionDirectory)\..\out\**" />
-    </ComponentGroup>
-  </Fragment>
+				<!-- Registry Value -->
+				<RegistryValue
+					Root="HKCU"
+					Key="Software\MPCorp\SystemHealthMonitorApp"
+					Name="Installed"
+					Type="integer"
+					Value="1" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
 </Wix>
